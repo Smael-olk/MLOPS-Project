@@ -9,9 +9,6 @@ with open(f"{Base_dir}/final_model.joblib","rb") as f:
     # Load the trained model
     model = joblib.load(f)
 
-classes={0: "Borrower will default",
-         1:  "Borrower will not default"
-}
 def sanitize(data:str):
     L=data.split(",")
     for i in range(6,11):
@@ -39,6 +36,5 @@ def predict_loan(L:list):
     result_re = result_array.reshape(1, -1)
     ss.fit_transform(result_re)
     prediction = model.predict(result_re)
-    return classes[prediction[0]]
-
+    return int(prediction[0])
 
